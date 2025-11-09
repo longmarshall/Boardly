@@ -1,25 +1,21 @@
-let device;
-async function connectBluetooth() {
-  try {
-    device = await navigator.bluetooth.requestDevice({
-      filters: [{ namePrefix: 'ESP32' }],
-      optionalServices: ['0000ffe0-0000-1000-8000-00805f9b34fb']
-    });
-    const server = await device.gatt.connect();
-    window.characteristic = await server.getPrimaryService('0000ffe0-0000-1000-8000-00805f9b34fb')
-      .then(service => service.getCharacteristic('0000ffe1-0000-1000-8000-00805f9b34fb'));
-    alert("Connected to ESP32!");
-  } catch (error) {
-    alert("Connection failed: " + error);
-  }
-}
+fetch('https://www.thesportsdb.com/api/v1/json/123/livescore.php')
+  .then(res => res.json())
+  .then(data => {
+    const scores = data.events;
+    const container = document.getElementById('live-scores');
+    container.innerHTML = ''; // Clear old scores
 
-function sendScore() {
-  const teamA = document.getElementById("teamA").value;
-  const scoreA = document.getElementById("scoreA").value;
-  const teamB = document.getElementById("teamB").value;
-  const scoreB = document.getElementById("scoreB").value;
-  const message = `${teamA}:${scoreA}|${teamB}:${scoreB}`;
-  const encoder = new TextEncoder();
-  window.characteristic.writeValue(encoder.encode(message));
-}
+    scores.forEach(event => {
+      const div = document.createElement('div');
+      div.className = 'score-card';
+      div.innerHTML = `
+        <h3>${event.strEvent}</h3>
+        <p>${event.strHomeTeam} ${event.intHomeScore} - ${event.intAwayScore} ${event.strAwayTeam}</p>
+        <button onclick="connectToBoardly('${event.strHomeTeam}', '${event.intHomeScore}', '${event.strAwayTeam}', '${event.intAwayScore}')">
+          Send to Scoreboard
+        </button>
+      `;
+      container.appendChild(div);
+    });
+  });
+
