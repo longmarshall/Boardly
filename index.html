@@ -1,17 +1,32 @@
-OCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>Boardly Scoreboard</title>
+  <meta charset="UTF-8">
+  <title>BoardlyUSA – Buy the Scoreboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Boardly Scoreboard</h1>
-  <label>Team A: <input id="teamA" type="text"></label>
-  <label>Score A: <input id="scoreA" type="number"></label><br>
-  <label>Team B: <input id="teamB" type="text"></label>
-  <label>Score B: <input id="scoreB" type="number"></label><br><br>
-  <button onclick="connectBluetooth()">Connect</button>
-  <button onclick="sendScore()">Send Score</button>
-  <script src="script.js"></script>
+  <header>
+    <h1>BoardlyUSA</h1>
+    <p>The Bluetooth scoreboard built for athletes, fans, and game-day hype.</p>
+  </header>
+
+  <section id="product">
+    <img src="your-product-image.jpg" alt="Boardly Scoreboard" style="max-width: 100%; border-radius: 10px;">
+    <h2>Buy Boardly</h2>
+    <p>Live scores. Bluetooth sync. Global sports coverage. All in one device.</p>
+    <button onclick="window.location.href='https://buy-link.com'">Buy Now</button>
+  </section>
+
+  <section id="connect">
+    <h3>Already own Boardly?</h3>
+    <button onclick="window.location.href='scoreboard.html'">Go to Scoreboard</button>
+  </section>
+
+  <footer>
+    <p>© 2025 BoardlyUSA | Built by Marshall</p>
+  </footer>
 </body>
 </html>
+
